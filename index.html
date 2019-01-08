@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery_折叠效果</title>
+</head>
+
+<body>
+
+<div class="fold_box">
+    <div class="fold_tit">Tit 1 <span class="ico"></span></div>
+    <div class="fold_con">Con 1</div>
+    <div class="fold_tit">Tit 2 <span class="ico"></span></div>
+    <div class="fold_con">Con 2</div>
+    <div class="fold_tit">Tit 3 <span class="ico"></span></div>
+    <div class="fold_con">Con 3</div>
+</div>
+<style>
+.fold_box { width: 400px; margin: 20px auto; }
+.fold_tit { position: relative; padding: 20px; border-bottom: 1px solid #dadada; background-color: #f5f5f5; }
+.fold_tit .ico { position: absolute; top: 20px; right: 20px; width: 16px; height: 16px; background-image: url(fold_ico.png); background-repeat: no-repeat; background-position: left 0; }
+.fold_tit.selected { color: red; background-color: #dadada; }
+.fold_tit.selected .ico { position: absolute; top: 20px; right: 20px; width: 16px; height: 16px; background-image: url(fold_ico.png); background-repeat: no-repeat; background-position: right 0; }
+.fold_con { display: none; padding: 20px; border: 1px solid #dadada; border-top: 0; }
+</style>
+<script src="jquery-1.8.3.min.js"></script>
+<script>
+$(function() {
+    var showIndex = 0;
+    $(".fold_tit").eq(showIndex).addClass('selected');
+    $(".fold_con").eq(showIndex).show();
+    $(".fold_tit").click(function(event) {
+        event.preventDefault();
+        $(this).toggleClass("selected").siblings('.fold_tit').removeClass("selected");
+        $(this).next(".fold_con").slideToggle(400).siblings(".fold_con").slideUp(400);
+    });
+});
+</script>
+
+</body>
+
+</html>
